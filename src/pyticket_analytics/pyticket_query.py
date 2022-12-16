@@ -4,11 +4,11 @@ import datetime as dt
 import requests
 import json
 
-def pyticket_analytics(keyword,apikey,start_date=dt.datetime.today() - dt.timedelta(30),sort='date,asc'):
+def pyticket_query(keyword,apikey,start_date=dt.datetime.today() - dt.timedelta(30),sort='date,asc'):
     """
-    This is an extension of previous function. It generates the visualization for the same inputs
+    This function generate query based on keyword and filtered date accessed through python
     """
-     # Reformat arguments
+    # Reformat arguments
     key = apikey
 
     # Date adjustment, standardized as API format
@@ -44,7 +44,6 @@ def pyticket_analytics(keyword,apikey,start_date=dt.datetime.today() - dt.timede
         event_df['enddate'][x] = event_df.sales[x].get('public').get('endDateTime')
     
     print('The request status is: {stats}')
-
-    # Return summary stats
-    event_df.genre.value_counts().plot(kind='bar') # frequency of genre
-    pd.crosstab(event_df['segment'],columns='percent', normalize=True).plot(kind='pie', subplots=True) # pie chart of segment
+    print('This is the top observation of keyword: {keyword}')
+    print(url)
+    return event_df
